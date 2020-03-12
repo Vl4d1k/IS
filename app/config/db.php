@@ -1,9 +1,8 @@
 <?php
 
-	return  [
-		'host' => "localhost",
-		'dbname' => "test",
-		'user' => 'root',
-		'password' => 'new-password'
-	];
-?>
+return  [
+	'host' => "localhost",
+	'dbname' => "test",
+	'user' => 'root',
+	'password' => 'new-password'
+];

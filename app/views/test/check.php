@@ -32,8 +32,8 @@
   <button type="" onclick="validate();">Отправить</button>
 </form>
 <script>
-    $("#body").ready(function () {
-      setCookie('testPage', 1, 10);
-      localStorage.setItem('testPage', Number(localStorage.getItem('testPage')) + 1);
-    });
-  </script>
+  $("#body").ready(function() {
+    setCookie('testPage', 1, 10);
+    localStorage.setItem('testPage', Number(localStorage.getItem('testPage')) + 1);
+  });
+</script>
