@@ -1,0 +1,45 @@
+@media all and (max-width: 850px) {
+    .dws-menu{
+     overflow: hidden;
+    }
+    
+.dws-menu ul{
+    display: block;
+   }  
+.dws-menu [type="checkbox"]{
+    display: none;
+   }
+#title img{
+    width: 360px;
+    height:auto;
+}
+#phot img{
+    width: phot0px;
+    height:auto;
+}
+.titl{
+    font-size: 12px;
+}
+.table_blur{
+    font-size: 12px;
+    top:60%;
+}
+}
+@media all and (max-width: 700px)
+{
+    #title img{
+    width: 240px;
+    height:auto;
+}
+#phot img{
+    width: 40px;
+    height:auto;
+}
+}
+.image{
+    display: none;
+}
+.oneimg{
+    display: none;
+}
+
