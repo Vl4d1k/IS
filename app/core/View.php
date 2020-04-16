@@ -3,7 +3,7 @@
 namespace app\core;
 
 class View{
-
+ 
 	public $path;
 	public $route;
 	public $layout = 'default';
@@ -14,8 +14,7 @@ class View{
 	}
 
 	public function render($title,$vars = []) {
-		extract($vars);
-		//var_dump($vars);
+		extract($vars);//проверить
 		if(file_exists('app/views/'.$this->path.'.php')){
 			ob_start();
 			require 'app/views/'.$this->path.'.php';
@@ -30,6 +29,9 @@ class View{
 		exit;
 	}
 
+	public function message($status, $message){
+			exit(json_encode(['status'=> $message, 'message' => $status]));
+	}
 }
 
 ?>

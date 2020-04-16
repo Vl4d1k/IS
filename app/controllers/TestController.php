@@ -6,6 +6,6 @@ use app\lib\Db;
 
 class TestController extends Controller {
 	public function checkAction(){
-		$this->view->render('Обо мне');
+		$this->view->render('Тест');
 	}
 } 

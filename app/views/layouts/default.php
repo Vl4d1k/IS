@@ -9,7 +9,7 @@
   <meta content='ie=edge' http-equiv='X-UA-Compatible'>
   <link href='/public/assets/css/main.css' rel='stylesheet'>
   <link href='/public/assets/css/media.css' rel='stylesheet' type='text/css'>
-  <script src='/public/assets/js/jquery-3.4.1.js' type='text/javascript'></script>
+  <script src='/public/assets/js/jquery.js' type='text/javascript'></script>
   <script src='/public/assets/js/history.js' type='text/javascript'></script>
 </head>
 

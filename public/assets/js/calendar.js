@@ -26,7 +26,6 @@ function writeTable() {
   var weekday = newDate.getDay() - 1;
   if (weekday == -1) weekday = 6;
   countDays = getDaysInMonth(month, year);
-  console.log(newDate, countDays, weekday);
   for (j = 0; j < weekday; j++) {
     newTable += '<td></td>';
   }
@@ -48,9 +47,8 @@ function setDate(bDay) {
   var active = "" + bDay;
   var bYear = document.getElementById("selectYear");
   var month = document.getElementById("selectMon").value;
-  console.log(month);
   if (bDay < 10) bDay = "0" + bDay;
   document.getElementById("target").value = "" + bDay + "." + month + "." + bYear.value;
   document.getElementById(active).className = "activeTd";
-  validateAge();
+  //validateAge();
 }

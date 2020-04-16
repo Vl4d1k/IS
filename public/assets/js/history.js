@@ -1,5 +1,5 @@
 function setCookie(name, value, exlpiration_days) {
-    console.log("Coookkkii");
+    //console.log("Coookkkii");
     var NewValue = Number(getCookie(name)) + Number(value);
     var date = new Date();
     date.setDate(date.getDate() + exlpiration_days);

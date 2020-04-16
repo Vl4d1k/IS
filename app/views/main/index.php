@@ -17,6 +17,7 @@
     }, 2000);
   });
 </script>
+<script src="/public/assets/js/audio.js" type='text/javascript'></script>
 <script>
     $("#body").ready(function () {
       setCookie('mainPage', 1, 10);
