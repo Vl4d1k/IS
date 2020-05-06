@@ -1,35 +1,35 @@
 <?php
 
 	return  [
-		'photo/show' => [
+		'web.loc/photo/show' => [
 			"controller" => "photo",
 			"action" => "show",
 		],
-		'interest/show' => [
+		'web.loc/interest/show' => [
 			"controller" => "interest",
 			"action" => "show",
 		],
-		'education/table' => [
+		'web.loc/education/table' => [
 			"controller" => "education",
 			"action" => "table",
 		],
-		'test/check' => [
+		'web.loc/test/check' => [
 			"controller" => "test",
 			"action" => "check",
 		],
-		'history/watch' => [
+		'web.loc/history/watch' => [
 			"controller" => "history",
 			"action" => "watch",
 		],
-		'contact/test' => [
+		'web.loc/contact/test' => [
 			"controller" => "contact",
 			"action" => "test",
 		],
-		'about/informat' => [
+		'web.loc/about/informat' => [
 			"controller" => "about",
 			"action" => "informat",
 		],
-		'' => [
+		'web.loc' => [
 			"controller" => "main",
 			"action" => "index",
 		]

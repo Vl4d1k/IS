@@ -1,125 +1,213 @@
 <?php
+
 namespace app\models\validators;
 
-use app\core\Model;
+class FormValidation
+{
 
-class FormValidation{
+  public $postData = array(); //массив отправленных данных
 
-  public $postData = array();//массив отправленных данных
+  public $errors = array(); //массив ошибок
 
-  public $errors = array();//массив ошибок
+  public $rules = array(); //массив правил валилирования
 
-  public $patterns = array();//массив правил валидирования
+  public $currentRule = 0;
 
-  public $errMsg = array();//массив сообщений об ошибке
+  public function __construct()
+  {
+  }
 
-  public function __construct() {}
+  public function valid()
+  {
+    var_dump($this->rules);
+    die();
+    foreach ($this->rules as $rule) {
+      switch ($rule['rule']) {
 
-  public function get($field_name = false){
+        case 'isFIO':
+          $this->isFIO($rule['field_name']);
+          break;
+        case 'isDate':
+          $this->isDate($rule['field_name']);
+          break;
+        case 'NotEmpty':
+          $this->isNotEmpty($rule['field_name']);
+          break;
+        case 'isEmail':
+          $this->isEmail($rule['field_name']);
+          break;
+        case 'isThereEmail':
+          $this->isThereEmail($rule['field_name']);
+          break;
+        case 'isPhoneNumber':
+            $this->isPhoneNumber($rule['field_name']);
+            break;
+      }
+      $this->currentRule++;
+    }
+  }
+
+  public function isFIO($field){
+    $passed = false;
+    if ($this->postData[$field]) {
+      $words = explode(" ", $this->postData[$field]);
+      foreach ($words as $word) {
+        if (preg_match( '/([А-ЯЁ][а-яё]+[\-\s]?){3,}/' , $word)) {
+          $passed = true;
+          break;
+        }
+      }
+
+      if ($passed) {
+        return true;
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    } else {
+      array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+      return false;
+    }
+  }
+
+  public function isPhoneNumber($field){
+    $passed = false;
+    if ($this->postData[$field]) {
+      $words = explode(" ", $this->postData[$field]);
+      foreach ($words as $word) {
+        if (preg_match( '/^\+7\d{9}/' , $word)) {
+          $passed = true;
+          break;
+        }
+      }
+
+      if ($passed) {
+        return true;
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    } else {
+      array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+      return false;
+    }
+  }
+
+    //метод проверки является ли значение data не пустым
+    public function isNotEmpty($field)
+    {
+      if (!empty($this->postData[$field])) {
+        return true;
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    }
+  
+    public function isThereEmail($field)
+    {
+      $passed = false;
+      if ($this->postData[$field]) {
+        $words = explode(" ", $this->postData[$field]);
+        foreach ($words as $word) {
+          if (filter_var($word, FILTER_VALIDATE_EMAIL)) {
+            $passed = true;
+            break;
+          }
+        }
+  
+        if ($passed) {
+          return true;
+        } else {
+          array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+          return false;
+        }
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    }
+  
+    public function isEmail($field)
+    {
+      if ($this->postData[$field]) {
+        if (!filter_var($this->postData[$field], FILTER_VALIDATE_EMAIL)) {
+          array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    }
+
+  public function isDate($field){
+    $passed = false;
+    if ($this->postData[$field]) {
+      $words = explode(" ", $this->postData[$field]);
+      foreach ($words as $word) {
+        if (preg_match( '/^[0-1][0-9].[0-3][0-9].[0-9]{4}/' , $word)) {
+          $passed = true;
+          break;
+        }
+      }
+
+      if ($passed) {
+        return true;
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    } else {
+      array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+      return false;
+    }
+  }
+
+  public function get($field_name = false)
+  {
     if ($field_name)
       return $this->postData[$field_name];
     else
       return $this->postData;
   }
 
-  public function post($field)
+  public function setPostData($data)
   {
-    $this->postData[$field] = $_POST[$field];
+    $this->postData = $data;
     return $this;
   }
 
   //метод выполняющий проверку элементов в массиве post_array(добавил $field(поле валидируемой переменной))
-  public function Validate($post_array, $field) {
-    if (preg_match($this->patterns[$field], $post_array[$field] )) {
+  public function checkWithRegExp($post_array, $field)
+  {
+    if (preg_match($this->patterns[$field], $post_array[$field])) {
       return true;
-     }
-     else
-     {
-      array_push($this->errors, $this->errMsg[$field]);
+    } else {
+      array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
       return false;
-     }
-       
+    }
   }
 
   //метод, добавляющий в массив Rules проверку для поля field_name типа validator
-  public function SetRule($field_name, $validator) {
+  public function setPattern($field_name, $validator)
+  {
     $this->patterns += [$field_name => $validator];
     return true;
   }
+
   //метод, выводящий все сообщения об ошибках из поля Errors
-  public function ShowErrors(){
-      return $this->errors;
+  public function getErrors()
+  {
+    return $this->errors;
   }
 
-  //метод проверки, что в строке $count слов
-  public function Words($str,$count){ 
-    if(str_word_count($str) != $count) { 
-      array_push($this->errors, "ФИО должно состоять из 3 слов!"); 
-      return false; 
-    }
-    else 
-      return true;
-  }
-
-  //метод проверки является ли значение data не пустым($field название на русском)
-  public function isNotEmpty($data, $field = ' ') {
-    if(!empty($data)){
-      return true;
-    }
-    else {
-      $msg = "Поле ". $field. " не дожно быть пустым";
-      array_push($this->errors, $msg);
-      return false;
-    }
-  }
-  
-  //метод проверки является ли значение data строковым представлением целого числа
-  public function isInteger($data) {
-    if(is_int($data))
-      return true;
-    else 
-      return "Поле должно содержать только цифры!";
-  }
-  //метод проверки является ли  data строковым представлением целого числа и не меньшим, чем value
-  public function isLess($data, $value) {
-    if( is_int($data) && is_int($value) )
-    {
-      if($data > $value)
-        return true;
-      else "Данные меньше указанного значения";
-    }   
-    else 
-      return "Поле должно соддержать только цифры!";
-  }
-
-  //метод проверки является ли data строковым представлением целого числа и не большим, чем value
-  public function isGreater($data, $value) {
-    if( is_int($data) && is_int($value) )
-    {
-      if($data < $value)
-        return true;
-      else "Данные больше указанного значения";
-    }   
-    else 
-      return "Поле должно соддержать только цифры!";
-  }
-
-  //метод проверки является ли data email
-  public function isEmail($data) {
-    if($data){
-      if (!filter_var($data, FILTER_VALIDATE_EMAIL)) 
-      {
-        array_push($this->errors, "Почта введена неправильно");
-        return false;
-      }
-      else
-        return true;
-    }
-    else
-    {
-      array_push($this->errors, "Почта введена неправильно");
-      return false;
-    }
-
+  public function setRule($field_name, $rule, $errorMsg)
+  {
+    $rule = array('field_name' => $field_name,'rule' => $rule,'errorMsg' => $errorMsg);
+    array_push($this->rules, $rule);
+    return $this;
   }
 }

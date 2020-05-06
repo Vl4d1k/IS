@@ -1,4 +1,4 @@
-<link href='/public/assets/css/tablestyl.css' rel='stylesheet'>
+<link href='/web.loc/public/assets/css/tablestyl.css' rel='stylesheet'>
 <div class='titl'>
     <p>Севастопольский государственный университет</p>
     Кафедра "Информационные системы"

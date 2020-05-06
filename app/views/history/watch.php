@@ -1,4 +1,4 @@
-<link href='/public/assets/css/tablestyl.css' rel='stylesheet'>
+<link href='/web.loc/public/assets/css/tablestyl.css' rel='stylesheet'>
 
 <table position="center">
   <tr>

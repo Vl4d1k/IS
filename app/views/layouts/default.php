@@ -7,10 +7,10 @@
   <meta charset='UTF-8'>
   <meta content='width=device-width, initial-scale=1.0' name='viewport'>
   <meta content='ie=edge' http-equiv='X-UA-Compatible'>
-  <link href='/public/assets/css/main.css' rel='stylesheet'>
-  <link href='/public/assets/css/media.css' rel='stylesheet' type='text/css'>
-  <script src='/public/assets/js/jquery.js' type='text/javascript'></script>
-  <script src='/public/assets/js/history.js' type='text/javascript'></script>
+  <link href='/web.loc/public/assets/css/main.css' rel='stylesheet'>
+  <link href='/web.loc/public/assets/css/media.css' rel='stylesheet' type='text/css'>
+  <script src='/web.loc/public/assets/js/jquery.js' type='text/javascript'></script>
+  <script src='/web.loc/public/assets/js/history.js' type='text/javascript'></script>
 </head>
 
 <body>
@@ -18,53 +18,54 @@
     <nav class='dws-menu'>
       <ul>
         <li>
-          <a href='/'><i class='fa fa-'></i>Главная
+          <a href='/web.loc/'><i class='fa fa-'></i>Главная
           </a>
         </li>
         <li>
-          <a href='/interest/show'><i class='fa fa-'></i>Мои интересы
+          <a href='/web.loc/interest/show'><i class='fa fa-'></i>Мои интересы
           </a>
           <ul>
             <li>
-              <a href='/interest/show'>Фильмы</a>
+              <a href='/web.loc/interest/show'>Фильмы</a>
             </li>
             <li>
-              <a href='/interest/show'>Книги</a>
+              <a href='/web.loc/interest/show'>Книги</a>
             </li>
             <li>
-              <a href='/interest/show'>Хобби</a>
+              <a href='/web.loc/interest/show'>Хобби</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href='/photo/show'><i class='fa fa-'></i>Фотоальбом
+          <a href='/web.loc/photo/show'><i class='fa fa-'></i>Фотоальбом
           </a>
         </li>
         <li>
-          <a href='/test/check'><i class='fa fa-'></i>Тест
+          <a href='/web.loc/test/check'><i class='fa fa-'></i>Тест
           </a>
         </li>
         <li>
-          <a href='/education/table'><i class='fa fa-'></i>Учеба
+          <a href='/web.loc/education/table'><i class='fa fa-'></i>Учеба
           </a>
         </li>
         <li>
-          <a href='/about/informat'><i class='fa fa-'></i>Обо мне
+          <a href='/web.loc/about/informat'><i class='fa fa-'></i>Обо мне
           </a>
         </li>
         <li>
-          <a href='/contact/test'><i class='fa fa-'></i>Контакты
+          <a href='/web.loc/contact/test'><i class='fa fa-'></i>Контакты
           </a>
         </li>
         <li>
-          <a href='/history/watch'><i class='fa fa-'></i>История
+          <a href='/web.loc/history/watch'><i class='fa fa-'></i>История
           </a>
         </li>
       </ul>
     </nav>
   </div>
   <?php
-  echo $content;
+    //echo $content;
+    require $view;
   ?>
 </body>
 

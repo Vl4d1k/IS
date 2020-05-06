@@ -7,7 +7,7 @@
   </script>
   <div id='title'>
     <p>Стельмах Владислав Олегович ИС-32</p>
-    <img alt='мальчик' class="image" src='\public\assets\img\20190724_173211.jpg' width='250'>
+    <img alt='мальчик' class="image" src='/web.loc/img/20190724_173211.jpg' width='250'>
   </div>
 </body>
 <script>
@@ -17,7 +17,6 @@
     }, 2000);
   });
 </script>
-<script src="/public/assets/js/audio.js" type='text/javascript'></script>
 <script>
     $("#body").ready(function () {
       setCookie('mainPage', 1, 10);

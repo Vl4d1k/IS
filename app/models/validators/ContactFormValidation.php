@@ -1,16 +1,22 @@
 <?php
 namespace app\models\validators;
 
-use app\core\Model;
 
 class ContactFormValidation extends FormValidation {
 
   public function __construct() {
-    $errs = array(
-      'tel' => 'Номер должен иметь вид : +7(10 цифр)',
-      'dr' => 'Дата должна иметь вид : дд.мм.гггг' );
-    $this->errMsg = $errs;
-    $this->SetRule('tel', '/^\+7\d{9}/');
-    $this->SetRule('dr',  '/^[0-1][0-9].[0-3][0-9].[0-9]{4}/');
+    //введем правила проверки
+    $this->setRule('tel', 'isPhoneNumber' , 'Поле телефон введено не верно');
+    $this->setRule('dr', 'isDate', 'Дата должна иметь вид: дд.мм.гггг');
+    $this->setRule('fio', 'isFIO', 'В поле ФИО должно иметь вид: Фамилия Имя Отчество.');
+
+    $this->setRule('text', 'NotEmpty', 'Поле текст не должно быть пустым.');
+    $this->setRule('text', 'isThereEmail', 'В поле текст должена быть введена электронная почта');
+
+    $this->setRule('sex', 'NotEmpty', 'Выберите пол.');
+    $this->setRule('email', 'isEmail', 'Электронная почта должна иметь вид: символы@символы.домен');
   }
+  
+
+
 }

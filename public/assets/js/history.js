@@ -7,6 +7,7 @@ function setCookie(name, value, exlpiration_days) {
     if (NewValue) document.cookie = "" + name + "=" + NewValue + "; expires=" + date + ";";
     else document.cookie = "" + name + "=" + value + "; expires=" + date + ";";
 }
+
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
         '(?:^|\s)' + name.replace(/([.$?*+\\\/{}|()\[\]^])/g, '\\$1') + '=(.*?)(?:;|$)'

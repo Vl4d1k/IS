@@ -5,12 +5,12 @@ use app\core\Model;
 
 class Photo extends Model{
 	public function getSrcs(){
-    $src = ['/public/assets/img/Cyborg.png','/public/assets/img/Cute_Mercy.png',
-      '/public/assets/img/Junkrat_Cute.png','/public/assets/img/Mei_Face.png','/public/assets/img/Overwatch_Logo.png',
-      '/public/assets/img/PI_Ana_Face.png','/public/assets/img/PI_Bewitching.png','/public/assets/img/widow.png',
-      '/public/assets/img/D.Va_Cute.png','/public/assets/img/PI_Snowman.png','/public/assets/img/PI_Sombra_Skull.png',
-      '/public/assets/img/PI_The_Doctor.png','/public/assets/img/PI_The_Reaper.png','/public/assets/img/hero.png',
-      '/public/assets/img/Tracer_Face.png'
+    $src = ['/web.loc/public/assets/img/Cyborg.png','/web.loc/public/assets/img/Cute_Mercy.png',
+      '/web.loc/public/assets/img/Junkrat_Cute.png','/web.loc/public/assets/img/Mei_Face.png','/web.loc/public/assets/img/Overwatch_Logo.png',
+      '/web.loc/public/assets/img/PI_Ana_Face.png','/web.loc/public/assets/img/PI_Bewitching.png','/web.loc/public/assets/img/widow.png',
+      '/web.loc/public/assets/img/D.Va_Cute.png','/web.loc/public/assets/img/PI_Snowman.png','/web.loc/public/assets/img/PI_Sombra_Skull.png',
+      '/web.loc/public/assets/img/PI_The_Doctor.png','/web.loc/public/assets/img/PI_The_Reaper.png','/web.loc/public/assets/img/hero.png',
+      '/web.loc/public/assets/img/Tracer_Face.png'
     ];
 		return $src;
   }

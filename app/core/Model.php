@@ -5,9 +5,17 @@ use app\lib\Db;
 abstract class Model {
 
 	public $db;
+	public $validator;
 
-	public function __construct()
+	//метод validate
+	public function valid()
 	{
-		$this->db = new Db;
+		$this->validator->valid();
+	}
+
+	public function __construct($validator = null)
+	{
+		$this->validator = $validator;
+		//$this->db = new Db;
 	}
 }
