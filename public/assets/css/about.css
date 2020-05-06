@@ -1,0 +1,11 @@
+h1{
+    font-size: 18px;
+    color: #a52a2a;
+}
+.block-round-content { 
+background: #308fce;  
+padding: 10px; 
+position: relative;
+left: 10px;
+width: 50%;
+}
