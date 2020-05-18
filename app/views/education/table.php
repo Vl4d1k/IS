@@ -1,3 +1,5 @@
+<div class="container">
+    <br>
 <link href='/web.loc/public/assets/css/tablestyl.css' rel='stylesheet'>
 <div class='titl'>
     <p>Севастопольский государственный университет</p>

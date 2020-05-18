@@ -1,5 +1,5 @@
 <link href='/web.loc/public/assets/css/tablestyl.css' rel='stylesheet'>
-
+<br>
 <table position="center">
   <tr>
     <td>История за cесию</td>

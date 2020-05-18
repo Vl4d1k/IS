@@ -10,7 +10,7 @@ class Db {
 	public function __construct()	{
 		//config file
 		$config = require 'app/config/db.php';
-		//connect to bd
+		//connect to db
 		$host = $config['host'];
 		$name = $config['dbname'];
 		$user = $config['user'];

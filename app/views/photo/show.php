@@ -7,8 +7,8 @@
     <i class='arrow' id='right'></i>
   </div>
 </div>
+<br><br><br>
 <div class='gallery'>
-
   <?php
   $id = 1;
   for ($i = 1; $i <= 3; $i++) {

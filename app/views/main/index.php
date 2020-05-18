@@ -1,10 +1,11 @@
-</div>
+<br>
   Today:
   <span id='time'></span>
-  <script src="/public/assets/js/showTime.js" type='text/javascript'></script>
+  <script src="/web.loc/public/assets/js/showTime.js" type='text/javascript'></script>
   <script>
     setInterval(showDate, 1000);
   </script>
+  
   <div id='title'>
     <p>Стельмах Владислав Олегович ИС-32</p>
     <img alt='мальчик' class="image" src='/web.loc/img/20190724_173211.jpg' width='250'>

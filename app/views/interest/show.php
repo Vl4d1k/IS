@@ -1,3 +1,6 @@
+<br>
+<br>
+<br>
 <div>
   <?php
   for ($i = 0; $i < count($anchors); $i += 2) {

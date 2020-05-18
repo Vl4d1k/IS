@@ -2,7 +2,7 @@
 
 return  [
 	'host' => "localhost",
-	'dbname' => "test",
-	'user' => 'root',
-	'password' => 'new-password'
+	'db' => "web.loc",
+	'user' => "root",
+	'pass' => ''
 ];

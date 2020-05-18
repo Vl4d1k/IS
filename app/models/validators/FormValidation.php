@@ -19,8 +19,6 @@ class FormValidation
 
   public function valid()
   {
-    var_dump($this->rules);
-    die();
     foreach ($this->rules as $rule) {
       switch ($rule['rule']) {
 
@@ -40,19 +38,93 @@ class FormValidation
           $this->isThereEmail($rule['field_name']);
           break;
         case 'isPhoneNumber':
-            $this->isPhoneNumber($rule['field_name']);
-            break;
+          $this->isPhoneNumber($rule['field_name']);
+          break;
+        case 'Loaded':
+          $this->Loaded($rule['field_name']);
+          break;
       }
       $this->currentRule++;
     }
   }
 
-  public function isFIO($field){
+  public function isFIO($field)
+  {
     $passed = false;
     if ($this->postData[$field]) {
       $words = explode(" ", $this->postData[$field]);
       foreach ($words as $word) {
-        if (preg_match( '/([А-ЯЁ][а-яё]+[\-\s]?){3,}/' , $word)) {
+        if (preg_match('/([А-ЯЁ][а-яё]+[\-\s]?){3,}/', $word)) {
+          $passed = true;
+          break;
+        }
+      }
+
+      if ($passed) {
+        return true;
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    } else {
+      array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+      return false;
+    }
+  }
+  //сделать 2 метода
+  public function isPhoneNumber($field)
+  {
+    $passed = false;
+    if (!$this->postData[$field]) {
+      $words = explode(" ", $this->postData[$field]);
+      foreach ($words as $word) {
+        if (preg_match('/^\+7\d{9}/', $word)) {
+          $passed = true;
+          break;
+        }
+      }
+
+      if ($passed) {
+        return true;
+      } else {
+        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+        return false;
+      }
+    } 
+    else {
+      array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+      return false;
+    }
+  }
+
+  //метод проверки является ли значение data не пустым
+  public function isNotEmpty($field)
+  {
+    if (!empty($this->postData[$field])) {
+      return true;
+    }
+
+    array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+    return false;
+  }
+
+  public function Loaded($field)
+  {
+    if ($_FILES['userFile']['name']) {
+      return true;
+    }
+
+    array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
+    return false;
+  }
+
+  public function isThereEmail($field)
+  {
+    $passed = false;
+    if ($this->postData[$field]) {
+      $words = explode(" ", $this->postData[$field]);
+      foreach ($words as $word) {
+        if (filter_var($word, FILTER_VALIDATE_EMAIL)) {
           $passed = true;
           break;
         }
@@ -70,22 +142,14 @@ class FormValidation
     }
   }
 
-  public function isPhoneNumber($field){
-    $passed = false;
+  public function isEmail($field)
+  {
     if ($this->postData[$field]) {
-      $words = explode(" ", $this->postData[$field]);
-      foreach ($words as $word) {
-        if (preg_match( '/^\+7\d{9}/' , $word)) {
-          $passed = true;
-          break;
-        }
-      }
-
-      if ($passed) {
-        return true;
-      } else {
+      if (!filter_var($this->postData[$field], FILTER_VALIDATE_EMAIL)) {
         array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
         return false;
+      } else {
+        return true;
       }
     } else {
       array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
@@ -93,62 +157,13 @@ class FormValidation
     }
   }
 
-    //метод проверки является ли значение data не пустым
-    public function isNotEmpty($field)
-    {
-      if (!empty($this->postData[$field])) {
-        return true;
-      } else {
-        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
-        return false;
-      }
-    }
-  
-    public function isThereEmail($field)
-    {
-      $passed = false;
-      if ($this->postData[$field]) {
-        $words = explode(" ", $this->postData[$field]);
-        foreach ($words as $word) {
-          if (filter_var($word, FILTER_VALIDATE_EMAIL)) {
-            $passed = true;
-            break;
-          }
-        }
-  
-        if ($passed) {
-          return true;
-        } else {
-          array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
-          return false;
-        }
-      } else {
-        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
-        return false;
-      }
-    }
-  
-    public function isEmail($field)
-    {
-      if ($this->postData[$field]) {
-        if (!filter_var($this->postData[$field], FILTER_VALIDATE_EMAIL)) {
-          array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
-          return false;
-        } else {
-          return true;
-        }
-      } else {
-        array_push($this->errors, $this->rules[$this->currentRule]['errorMsg']);
-        return false;
-      }
-    }
-
-  public function isDate($field){
+  public function isDate($field)
+  {
     $passed = false;
     if ($this->postData[$field]) {
       $words = explode(" ", $this->postData[$field]);
       foreach ($words as $word) {
-        if (preg_match( '/^[0-1][0-9].[0-3][0-9].[0-9]{4}/' , $word)) {
+        if (preg_match('/^[0-1][0-9].[0-3][0-9].[0-9]{4}/', $word)) {
           $passed = true;
           break;
         }
@@ -206,7 +221,7 @@ class FormValidation
 
   public function setRule($field_name, $rule, $errorMsg)
   {
-    $rule = array('field_name' => $field_name,'rule' => $rule,'errorMsg' => $errorMsg);
+    $rule = array('field_name' => $field_name, 'rule' => $rule, 'errorMsg' => $errorMsg);
     array_push($this->rules, $rule);
     return $this;
   }
