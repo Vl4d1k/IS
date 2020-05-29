@@ -18,7 +18,7 @@ class Message extends Model
     parent::valid();
   }
 
-  public function sendRespons($nameFile, $post_array)
+  public function upload($nameFile, $post_array)
   {
     $respons = [
       $post_array['surname'],
@@ -37,9 +37,10 @@ class Message extends Model
     fclose($file);
   }
 
-  public function loadGuestBook($FILES, $nameField){
+  public function save($FILES, $nameField){
+    $config = require 'app/config/files.php';
     if (!empty($FILES)) {
-			$file = "C:/xampp/htdocs/web.loc/public/files/" . $_FILES[$nameField]['name'];
+			$file = $config['files'] . $_FILES[$nameField]['name'];
 			if ($_FILES[$nameField]['error'] == UPLOAD_ERR_OK) {
 				move_uploaded_file($_FILES[$nameField]['tmp_name'], $file);
 				return true;
@@ -49,7 +50,7 @@ class Message extends Model
 		}
   }
 
-  public function readComments($nameFile, $path)
+  public function findAll($nameFile, $path)
   {
     $file = fopen("$path/$nameFile", "r");
     $comments = [];

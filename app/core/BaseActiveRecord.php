@@ -5,7 +5,7 @@ namespace app\core;
 use PDO;
 use PDOException;
 
-class BaseActiveRecord
+class BaseActiveRecord extends Model
 {
 
   public static $pdo;
@@ -13,13 +13,15 @@ class BaseActiveRecord
   protected static $tablename;
 
   public $id = null;
+  public $created_at = null;
 
   protected static $fields = array();
   protected static $dbConfig = array();
 
 
-  public function __construct()
+  public function __construct($validator = null)
   {
+    $this->validator = $validator;
     //config file
     $config = require 'app/config/db.php';
     //set config
@@ -148,6 +150,7 @@ class BaseActiveRecord
 
   public function insert()
   {
+    if(empty($this->created_at)) $this->created_at = date("d.m.Y");
     $insertQuery = 'INSERT INTO `%s` (%s) VALUES (%s)';
 
     $fieldsStr = '';

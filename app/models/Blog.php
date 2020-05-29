@@ -2,13 +2,23 @@
 
 namespace app\models;
 
-use app\core\Model;
-use app\models\BlogAR;
+use app\core\BaseActiveRecord;
 use app\models\validators\BlogValidation;
 
 
-class Blog extends Model
+class Blog extends BaseActiveRecord
 {
+
+  protected static $tablename = 'blogs';
+
+  public $topic;
+
+  public $image;
+
+  public $text;
+
+  public $created_at;
+
   public function __construct($validator = null)
   {
     $validator = new BlogValidation;
@@ -22,19 +32,18 @@ class Blog extends Model
 
   public function uploadBlog($post_array, $files_array)
   {
-    $blog = new BlogAR();
-    $blog->topic = $post_array['topic'];
-    $blog->text = $post_array['text'];
-    $blog->text = $post_array['author'];
+    $this->topic = $post_array['topic'];
+    $this->text = $post_array['text'];
     //save image url
     if ($files_array['userFile']['error'] == UPLOAD_ERR_OK) {
       $upload_image = $files_array['userFile']['name'];
       //сделать загрузку пути из config
-      $folder = "C:/xampp/htdocs/web.loc/public/assets/img/";
+      $config = require 'app/config/files.php';
+      $folder = $config['images'];
       move_uploaded_file($files_array['userFile']['tmp_name'], $folder . $upload_image);
     }
-    $blog->image = $upload_image;
-    $blog->save();
+    $this->image = $upload_image;
+    $this->save();
   }
 
   public function loadBlogFromFile($FILES, $nameField)
@@ -58,13 +67,12 @@ class Blog extends Model
         }
         fclose($file);
         //загрузим наши данные в бд
-        $blog = new BlogAR();
         foreach ($blogs as $value) {
-          $blog->topic = $value['topic'];
-          $blog->text = $value['text'];
-          $blog->image = 'laravel-6.png';
-          $blog->created_at = $value['created_at'];
-          $blog->save();
+          $this->topic = $value['topic'];
+          $this->text = $value['text'];
+          $this->image = 'laravel-6.png';
+          $this->created_at = $value['created_at'];
+          $this->save();
         }
         return true;
       }

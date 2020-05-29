@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\Models\BlogAR;
 
 class BlogController extends Controller
 {
@@ -37,8 +36,7 @@ class BlogController extends Controller
   }
 
   public function showAction(){
-    $blog = new BlogAR;
-    $blogs = $blog->findAll();
+    $blogs = $this->model->findAll();
 
     usort($blogs, function ($a, $b) {
       return strcmp($a->created_at, $b->created_at);

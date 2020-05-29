@@ -1,3 +1,5 @@
+  <p>
+  <br>
   <?php
   if (!empty($_POST)) {
     if ($result) {

@@ -10,7 +10,7 @@ class MessageController extends Controller
 
 	public function createAction()
 	{
-		$comments = $this->model->readComments("messages.inc", "public/files");
+		$comments = $this->model->findAll("messages.inc", "public/files");
 		$vars = ['comments' => $comments];
 		if (!empty($_POST)) {
 			$this->model->validator->setPostData($_POST); //положим пост данные в соотвтветствующее поле класс ContactValidator
@@ -21,8 +21,8 @@ class MessageController extends Controller
 				$vars += ['errors' => $errors];
 				$this->view->render('Гостевая книга', $vars);
 			} else {
-				$this->model->sendRespons("messages.inc", $_POST);
-				$comments = $this->model->readComments("messages.inc", "public/files");
+				$this->model->upload("messages.inc", $_POST);
+				$comments = $this->model->findAll("messages.inc", "public/files");
 				$vars['comments'] = $comments;
 				$this->view->render('Гостевая книга', $vars);
 			}
@@ -34,7 +34,7 @@ class MessageController extends Controller
 	public function uploadAction()
 	{
 		if (!empty($_POST)) {
-			$result = $this->model->loadGuestBook($_FILES, "userFile");
+			$result = $this->model->save($_FILES, "userFile");
 			$vars = ['result' => $result];
 			return $this->view->render('Гостевая книга', $vars);
 		} 

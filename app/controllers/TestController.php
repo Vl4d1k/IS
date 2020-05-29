@@ -3,15 +3,13 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\lib\Db;
-use app\Models\TestAR;
 
 class TestController extends Controller
 {
 	public function checkAction()
 	{
-		$message = new TestAR;
-		$allResults = $message->findAll();
+		//изменения
+		$allResults = $this->model->findAll();
 
 		$vars = ['allResults' => $allResults];
 		if (!empty($_POST)) {
@@ -33,7 +31,7 @@ class TestController extends Controller
 				$this->model->saveResult($_POST['fio'], $result,$answers);
 
 				//снова делаем запрос в бд
-				$allResults = $message->findAll();
+				$allResults = $this->model->findAll();
 				$vars['allResults'] = $allResults;
 				//передадим результат во вьюшку
 				$vars += ['result' => $result];
