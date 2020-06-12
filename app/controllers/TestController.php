@@ -23,9 +23,6 @@ class TestController extends Controller
 				//получим результт
 				$result = $this->model->validator->getResult();
 				$answers = $this->model->validator->getUserAnswers();
-				/*var_dump($result);	
-				var_dump($answers); 
-				die();*/
 
 				//вызовем метод который сохранит результат в бд
 				$this->model->saveResult($_POST['fio'], $result,$answers);

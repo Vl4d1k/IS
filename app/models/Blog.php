@@ -80,4 +80,53 @@ class Blog extends BaseActiveRecord
       return false;
     }
   }
+
+  public function linksPages()
+  {
+    // количество записей, выводимых на странице
+    $per_page = 2;
+
+    // получаем номер страницы
+    $page = (int) (isset($_GET['page']) ? ($_GET['page'] - 1) : 0);
+
+    // вычисляем первый операнд для LIMIT
+    $start = abs($page * $per_page);
+
+    // выполняем запрос и выводим записи
+    $query = "SELECT * FROM " . static::$tablename . " ORDER BY `" . static::$tablename . "`.`created_at` DESC LIMIT $start, $per_page";
+
+    $rows = static::$pdo->query($query);
+
+    $pages = [];
+    // выводим ссылки на страницы:
+    $query = "SELECT count(*) FROM " . static::$tablename;
+    $total_rows = static::$pdo->query($query)->fetchColumn();
+
+    // Определяем общее количество страниц
+    $num_pages = (int) ceil($total_rows / $per_page);
+
+    for ($i = 1; $i <= $num_pages; $i++) {
+      // текущую страницу выводим без ссылки
+      if ($i - 1 == $page) {
+        $pages[$i] = "$i ";
+
+        if( $i + 1 > $num_pages) $next = "<a  class='disabled' href='show?page=" . $i . "'> Следующая </a> ";
+        else $next = "<a  class='disabled' href='show?page=" . ($i + 1) . "'> Следующая </a> ";
+
+        if($i - 1 == 0) $prev = "<a class='disabled' href='show?page=" . $i . "'> Предыдущая </a> ";
+        else $prev = "<a  href='show?page=" . ($i - 1) . "'> Предыдущая </a> ";
+
+      } else {
+        $pages[$i] = "<a href='show?page=" . $i . "'>" . $i . "</a> ";
+      }
+
+    }
+
+    return [
+      'rows' => $rows,
+      'pages' => $pages,
+      'prev' => $prev,
+      'next' => $next
+    ];
+  }
 }

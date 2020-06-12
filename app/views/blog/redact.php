@@ -1,5 +1,3 @@
-<p>
-<br>
 <?php
 if (!empty($_POST)) {
   if (!empty($errors)) {
@@ -24,7 +22,7 @@ if (!empty($_POST)) {
   <form action="" enctype="multipart/form-data" method="POST" name="forma">
     <br>
     <p>
-    <!--
+      <!--
     <div class="form-group">
         <label for="name">Автор:</label>
         <input type="name" name="author" value="<?php if (!empty($values)) echo $values['author'] ?>" class="form-control" id="name" placeholder="Name">

@@ -8,18 +8,20 @@ class View{
 	public $route;
 	public $layout = 'default';
 
+
 	public function __construct($route) {
 		$this->route = $route;
 		$this->path = $route['controller'].'/'. $route['action'];
 	}
 
-	public function render($title,$vars = []) {
+	public function render($title,$vars = [], $masterTemplate = false) {
 		extract($vars);//проверить
 		if(file_exists('app/views/'.$this->path.'.php')){
-			//ob_start();
 			$view = 'app/views/'.$this->path.'.php';
-			//$content = ob_get_clean();
-			require 'app/views/layouts/'.$this->layout.'.php';
+			if($masterTemplate){
+				require 'app/views/layouts/'.$masterTemplate.'.php';
+			}
+			else require 'app/views/layouts/'.$this->layout.'.php';
 		}
 		else echo 'View not FOUND:'.$this->path;
 	}

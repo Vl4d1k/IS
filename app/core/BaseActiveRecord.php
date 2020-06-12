@@ -130,6 +130,11 @@ class BaseActiveRecord extends Model
     return static::query('SELECT * FROM `' . static::$tablename . '` ;');
   }
 
+  public static function findAllByFieldName($field): array
+  {
+    return static::query('SELECT '.$field.' FROM `' . static::$tablename . '` ;');
+  }
+
   //-----------------------------------------------------------------------
 
   public function __get($field)
@@ -140,7 +145,6 @@ class BaseActiveRecord extends Model
 
   public function save()
   {
-
     if ((!empty($this->id))) {
       return static::update();
     } else {
@@ -156,8 +160,6 @@ class BaseActiveRecord extends Model
     $fieldsStr = '';
     $valuesStr = '';
 
-    //static::$id = null;
-
     foreach (static::$fields as $field => $key) {
       $fieldsStr .= $field . ",";
       $valuesStr .= "'" . $this->__get($field) . "',";
@@ -172,7 +174,7 @@ class BaseActiveRecord extends Model
       $fieldsStr,
       $valuesStr
     );
-
+    var_dump($query); die();
     return static::query($query);
   }
 
@@ -192,4 +194,5 @@ class BaseActiveRecord extends Model
 
     return static::query($query);
   }
+
 }

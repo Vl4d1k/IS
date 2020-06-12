@@ -25,6 +25,14 @@ return  [
 		"controller" => "blog",
 		"action" => "upload",
 	],
+	'web.loc/blog/update' => [
+		"controller" => "blog",
+		"action" => "update",
+	],
+	'web.loc/comment/add' => [
+		"controller" => "comment",
+		"action" => "add",
+	],
 	'web.loc/test/check' => [
 		"controller" => "test",
 		"action" => "check",
@@ -44,6 +52,26 @@ return  [
 	'web.loc/contact/test' => [
 		"controller" => "contact",
 		"action" => "test",
+	],
+	'web.loc/auth/show' => [
+		"controller" => "auth",
+		"action" => "show",
+	],
+	'web.loc/auth/login' => [
+		"controller" => "auth",
+		"action" => "login",
+	],
+	'web.loc/auth/regist' => [
+		"controller" => "auth",
+		"action" => "regist",
+	],
+	'web.loc/auth/unique' => [
+		"controller" => "auth",
+		"action" => "unique",
+	],
+	'web.loc/auth/logout' => [
+		"controller" => "auth",
+		"action" => "logout",
 	],
 	'web.loc/about/informat' => [
 		"controller" => "about",

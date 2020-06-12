@@ -18,7 +18,8 @@ class Router{
 
 	//добавление мвршрута
 	public function add($route, $params) {
-		$route = '#^'.$route.'$#';
+		//$route = '#^'.$route.'$#';
+		$route = '#^'.$route.'\?.*$|^'.$route.'$#';
 		$this -> routes[$route] = $params;
 	}
 

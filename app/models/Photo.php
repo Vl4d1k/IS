@@ -4,6 +4,7 @@ namespace app\models;
 use app\core\Model;
 
 class Photo extends Model{
+  
 	public function getSrcs(){
     $src = ['/web.loc/public/assets/img/Cyborg.png','/web.loc/public/assets/img/Cute_Mercy.png',
       '/web.loc/public/assets/img/Junkrat_Cute.png','/web.loc/public/assets/img/Mei_Face.png','/web.loc/public/assets/img/Overwatch_Logo.png',
@@ -14,6 +15,7 @@ class Photo extends Model{
     ];
 		return $src;
   }
+
   public function getTitles(){
     $title = [
       "Cyborg", "Mercy","Junkrat","Mei","Overwatch_Logo","Ana_Face",
@@ -22,5 +24,4 @@ class Photo extends Model{
   ];
 		return $title;
   }
-  
 }

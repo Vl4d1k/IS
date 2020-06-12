@@ -50,33 +50,33 @@
 <table class="table">
   <tbody>
     <?php
-    if (empty($allResults)) : ?>
-      <h2>Пока еще нет результатов</h2>
-    <?php else :
-      echo "<h2>Результаты</h2>";
+    if($_SESSION['auth'] == 1){
+      if (empty($allResults)) echo "<h2>Пока еще нет результатов</h2>";
+      else
+      {
+        echo "<h2>Результаты</h2>";
 
-      foreach ($allResults as $oneResult => $value) {
-        echo "<div >";
-        echo '<hr align="left" width="0" size="4" color="#ff9900" />';
-        echo "<h4>" . $value->fio . "</h4>";
-        echo "<p>" . $value->result . "</p>";
-        echo "<p> Вопрос 1:";
-        echo "<p> Ответ:". $value->ans1;
-        if($value->flag1 === '1') echo " Верно"; else echo " Неверно";
-        echo "<p> Вопрос 2:";
-        echo "<p> Ответ:". $value->ans2;
-        if($value->flag2 === '1') echo " Верно"; else echo " Неверно";
-        echo "<p> Вопрос 3:";
-        echo "<p> Ответ:". $value->ans3;
-        if($value->flag3 === '1') echo " Верно"; else echo " Неверно";
-
-
-
-        echo "<p>" . $value->created_at . "</p>";
-        echo '<hr align="left" width="300" size="5" color="#ff9900" />';
-        echo "</div>";
+        foreach ($allResults as $oneResult => $value) {
+          echo "<div >";
+          echo '<hr align="left" width="0" size="4" color="#ff9900" />';
+          echo "<h4>" . $value->fio . "</h4>";
+          echo "<p>" . $value->result . "</p>";
+          echo "<p> Вопрос 1:";
+          echo "<p> Ответ:". $value->ans1;
+          if($value->flag1 === '1') echo " Верно"; else echo " Неверно";
+          echo "<p> Вопрос 2:";
+          echo "<p> Ответ:". $value->ans2;
+          if($value->flag2 === '1') echo " Верно"; else echo " Неверно";
+          echo "<p> Вопрос 3:";
+          echo "<p> Ответ:". $value->ans3;
+          if($value->flag3 === '1') echo " Верно"; else echo " Неверно";
+          echo "<p>" . $value->created_at . "</p>";
+          echo '<hr align="left" width="300" size="5" color="#ff9900" />';
+          echo "</div>";
+        }
       }
-    endif;
+    }
+    else echo "<h2>Для того,чтобы просмотреть результаты войдите на сайт.</h2>";
     ?>
   </tbody>
 </table>
