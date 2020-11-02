@@ -21,15 +21,19 @@
       <a class="navbar-brand" href="/web.loc">Вернуться на сайт</a>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-        <?php if($_SESSION['isAdmin'] == 1) echo "<li><a href='/web.loc/blog/upload'>Загрузка блога</a></li>
-          <li><a href='/web.loc/blog/redact'>Редактор блога</a></li>
-          <li><a href='/web.loc/auth/show'>Информации о посетителях</a></li>"
+        <?php if(!empty($_SESSION['isAdmin']) and $_SESSION['isAdmin'] == 1) 
+				echo "<li><a href='/web.loc/blog/upload'>Загрузка блога</a></li>
+				    <li><a href='/web.loc/blog/redact'>Редактор блога</a></li>
+				    <li><a href='/web.loc/auth/show'>Информации о посетителях</a></li>"
         ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="nav-item">
-          <?php if(($_SESSION['isAdmin'] == 1) || ($_SESSION['auth'] == 1) ) echo "<a class='nav-link' href='/web.loc/auth/logout'><span class='glyphicon glyphicon-user'></span> Выйти</a>" ;
-             else echo "<a class='nav-link' href='/web.loc/auth/login'><span class='glyphicon glyphicon-user'></span> Войти</a><li class='nav-item'><a class='nav-link' href='/web.loc/auth/regist'>Зарегистрираваться</a></li>";
+          <?php if(!empty($_SESSION['isAdmin']))
+					if(($_SESSION['isAdmin'] == 1) || ($_SESSION['auth'] == 1) ) 
+						echo "<a class='nav-link' href='/web.loc/auth/logout'><span class='glyphicon glyphicon-user'></span> Выйти</a>" ;
+					else 
+						echo "<a class='nav-link' href='/web.loc/auth/login'><span class='glyphicon glyphicon-user'></span> Войти</a><li class='nav-item'><a class='nav-link' href='/web.loc/auth/regist'>Зарегистрираваться</a></li>";
           ?>
           </li>
         </ul>

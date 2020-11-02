@@ -9,7 +9,6 @@ function addComent(blog_id) {
   //очищаем поле и скрываем модальное окно
   comment.value = "";
   $('#myModal').modal('hide');
-  
   //создаем новый комментарий
   let fio = document.getElementById('fio').innerHTML;
   console.log(fio);

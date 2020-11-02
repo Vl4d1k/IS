@@ -22,7 +22,7 @@ class Comment extends BaseActiveRecord
     parent::valid();
   }
 
-  public static function findComments($blog_id): array
+  public static function findCommentsWithUserLogin($blog_id): array
   {
     return static::query('SELECT `comments`.`id`,`comments`.`blog_id`,`comments`.`comment`,`comments`.`created_at`,`users`.`fio` FROM `comments` INNER JOIN `users` ON `comments`.`user_id` = `users`.`id` WHERE blog_id = '.$blog_id.';');
   }

@@ -7,8 +7,7 @@
   </script>
   
   <div id='title'>
-    <p>Стельмах Владислав Олегович ИС-32</p>
-    <img alt='мальчик' class="image" src='/web.loc/img/20190724_173211.jpg' width='250'>
+	<iframe frameborder="0" style="border:none;width:100%;height:750px;" width="100%" height="750" src="https://music.yandex.ru/iframe/#playlist/yamusic-daily/48916217">Слушайте <a href='https://music.yandex.ru/users/yamusic-daily/playlists/48916217'>Плейлист дня</a> — <a href='https://music.yandex.ru/users/yamusic-daily'>yamusic-daily</a> на Яндекс.Музыке</iframe>
   </div>
 </body>
 <script>

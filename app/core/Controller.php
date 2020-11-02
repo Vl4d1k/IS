@@ -18,17 +18,13 @@ abstract class Controller
 		$this->route = $route;
 		
 		$path = parse_url($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])['path'];
+		/*
 		if ($_SERVER['REQUEST_METHOD'] == 'GET' && $path != "localhost/web.loc/blog/update") {
 			//передаём в бд данные о пользователе	
-			//$visitor = new Visitors();
+			$visitor = new Visitors();
 			//$visitor->save_statistic($this->route['controller'] . '/' . $this->route['action']);
 		}
-		
-
-		if (!$this->checkAcl()) {
-			//View::redirect('https://developer.android.com/studio');
-		}
-
+		*/
 
 		$this->view = new View($route);
 		$this->model = $this->loadModel($route['controller']);

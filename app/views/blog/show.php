@@ -19,7 +19,7 @@ foreach ($rows as $temp) {
   echo "<small class='text-muted'></small><small class='text-muted'>" . $temp['created_at'] . "</small></div></div></div></div></div>";
   //комментарии пользователей
   echo "<div class='" . $temp['id'] ."'>";
-  $comments = $comment->findComments($temp['id']);
+  $comments = $comment->findCommentsWithUserLogin($temp['id']);
   foreach($comments as $comm){
     echo "<p><b><small class='text-muted'></small><small class='text-muted'>$comm->fio:  </small></b>";
     echo "<small class='text-muted'></small><small class='text-muted'> $comm->comment</small>";

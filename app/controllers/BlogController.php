@@ -54,13 +54,13 @@ class BlogController extends Controller
       $vars += [$mas[0]=>$mas[1]];
     }
     $blog = new Blog();
-    if($currentBlog = $blog->find($vars['id'])){
+    if($currentBlog = $blog->find($vars['id'])) {
       $currentBlog->text = $vars['text'];
       $currentBlog->topic = $vars['topic'];
-      $currentBlog->save();
-      $result = array('result' => 1);
-      echo 'result = 1';
-      //echo '$(".alert-success").fadeIn(); setTimeout(() => $(".alert-success").fadeOut(), 2000);';
+      if($currentBlog->save()){
+        echo '$(".alert-success").fadeIn(); setTimeout(() => $(".alert-success").fadeOut(), 2000);';
+      }
+      else echo '$(".alert-warning").fadeIn(); setTimeout(() => $(".alert-warning").fadeOut(), 2000);';
     }
     else {
       echo '$(".alert-warning").fadeIn(); setTimeout(() => $(".alert-warning").fadeOut(), 2000);';

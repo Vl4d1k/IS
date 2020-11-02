@@ -42,10 +42,14 @@
               <li><a href="/web.loc/interest/show#hobbi">Хобби</a></li>
             </ul>
           </li>
-          <?php if($_SESSION['isAdmin'] == 1) echo "<li><a href='/web.loc/auth/show' class='dropdown-toggle'>Админка</span></a></li>";?> 
+          <?php if( !empty($_SESSION['isAdmin']) and $_SESSION['isAdmin'] == 1) 
+					echo "<li><a href='/web.loc/auth/show' class='dropdown-toggle'>Админка</span></a></li>";
+		  ?> 
 
-          <?php if($_SESSION['auth'] == 1) echo "<li><a href=''>".$_SESSION['fio']."</a></li><li><a href='/web.loc/auth/logout'> Выйти</a></li>" ;
-          else echo "<li><a href='/web.loc/auth/login'><span class='glyphicon glyphicon-user'></span> Войти</a></li>";
+          <?php if( !empty($_SESSION['isAdmin']) and $_SESSION['auth'] == 1) 
+					echo "<li><a href=''>".$_SESSION['fio']."</a></li><li><a href='/web.loc/auth/logout'> Выйти</a></li>" ;
+				else 
+					echo "<li><a href='/web.loc/auth/login'><span class='glyphicon glyphicon-user'></span> Войти</a></li>";
           ?>
         </ul>
       </div>
